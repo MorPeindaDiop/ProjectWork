@@ -1,8 +1,9 @@
 
-<head>
+
   <script>
     import {link} from 'svelte-spa-router';
   </script>
+  <head>
   <style>
     body{
       background-color:black;
@@ -14,7 +15,8 @@
     }
 
   </style>
-</head>
+  </head>
+
 
 <p class="paragrafo">Diop car service</p>
 <br>
@@ -46,4 +48,4 @@
   </div>
 <br>
 <br>
-<a href="/marche" use:link> <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" routerLink="/marche" >CONFIGURA LA TUA AUTO</button></a>
+<a href="/marche" use:link> <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"  >CONFIGURA LA TUA AUTO</button></a>
