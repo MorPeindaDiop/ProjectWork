@@ -1,18 +1,38 @@
 <head>
-    
+
     <style>
         body{background-color:black;}
         /*----  Main Style  ----*/
         #cards_landscape_wrap-2 {
             text-align: center;
             background: rgb(51, 52, 51);
-            border-radius: 2%;
+           -webkit-border-radius: 20px;
+           -moz-border-radius: 20px;
+           border-radius:20px;
+           padding-bottom: 3%;
         }
 
         h2{
             padding-top:2%;
             color:white;
         }
+        p{color:white}
+        img{
+            padding-top:2%;
+            padding-bottom:2%;
+            width:40%;
+            height:40%;
+        }
+        .table{
+            
+            background-color:white;
+            width:80%;
+            margin:0 auto;
+            -webkit-border-radius: 15px;
+           
+        }
+        button {background-color: #008CBA;} /* Blue */
+        
     </style>
 </head>
 
@@ -21,24 +41,28 @@
     import { location} from 'svelte-spa-router'
     import { onMount } from 'svelte';
     import Api from '../Api.js';
-    export const idUrl = $location
+    export let idUrl = $location
+    idUrl = idUrl.replace(/%20/g,' ');
+    console.log(idUrl)
     let arrayUrl=idUrl.split('/');
-    let modelli = [];
-    let modelli2 = [];
-    let idMarca;
+    let motorizzazioni = [];
+    let motorizzazioni2 = [];
+    let idModello;
+    let modelloProva;
 
 onMount(async () => {
-    const response = await Api.get('/modelli/findAll')
-    let marche = await Api.get('/marche/findAll')
+    let response = await Api.get('/motorizzazioni/findAll')
+    let modelli = await Api.get('/modelli/findAll')
 
-    for (let marca of marche.result) {
-        if (marca.marca == arrayUrl[arrayUrl.length -1]) {
-        idMarca=marca.id_Marca;
+    for (let modello of modelli.result) {
+        if (modello.modello == arrayUrl[arrayUrl.length -1]) {
+            idModello=modello.id_Modello;
+            modelloProva=modello
         }
     }
-    for (let modello of response.result) {
-        if (modello.id_Marca == idMarca) {
-            modelli.push(modello);
+    for (let motorizzazione of response.result) {
+        if (motorizzazione.id_Modello == idModello) {
+            motorizzazioni.push(motorizzazione);
             stampo()
         }
 
@@ -47,48 +71,36 @@ onMount(async () => {
 
 });
 function stampo() {
-    modelli2 = modelli;
+    motorizzazioni2 = motorizzazioni;
+    console.log(motorizzazioni2)
 }
   </script>
 
-
-
-
-<!-- Topic Cards -->
-<!-- <p style="color:white">a {modelli2.lenght}</p> -->
-<!-- {#if modelli.lenght == undefined} -->
-{#await onMount}
-
-<!-- promise is pending -->
-<p>waiting for the promise to resolve...</p>
-{:then stampo}
-<!-- <p style="color:white">b {modelli2.length}</p> -->
 <div id="cards_landscape_wrap-2">
-    <h2>Seleziona la motorizzazione</h2>
-    <div class="container">
-        <div class="row">
-            {#each modelli2 as modello}
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <a href="{idUrl}/{modello.modello}" use:link>
-                    <div class="card-flyer">
-                        <div class="text-box">
-                            <div class="image-box">
-                                <img
-                                    src="{modello.src}"
-                                    alt=""
-                                />
-                            </div>
-                            <div class="text-container">
-                                <h6>{modello.modello}</h6>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            {/each}
-            
-        </div>
-    </div>
+{#if modelloProva != undefined}
+<img src="{modelloProva.src}" alt="">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Motore</th>
+        <th scope="col">Alimentazione</th>
+        <th scope="col">Cambio</th>
+        <th scope="col">Consumo</th>
+      </tr>
+    </thead>
+    <tbody>
+        {#each motorizzazioni2 as motorizzazione2}
+      <tr>
+        <td>{motorizzazione2.motore}</td>
+        <td>{motorizzazione2.alimentazione}</td>
+        <td>{motorizzazione2.cambio}</td>
+        <td>{motorizzazione2.consumo}</td>
+        <td> <a href=""> <button>SELEZIONA</button> </a></td>
+      </tr>
+      {/each}
+    </tbody>
+  </table>
+<!-- <p>{motorizzazione2.descrizione}</p> -->
+
+{/if}
 </div>
-<!-- {/if} -->
-{/await}

@@ -6,7 +6,9 @@
         #cards_landscape_wrap-2 {
             text-align: center;
             background: rgb(51, 52, 51);
-            border-radius: 2%;
+           -webkit-border-radius: 20px;
+           -moz-border-radius: 20px;
+           border-radius:20px;
         }
         #cards_landscape_wrap-2 .container {
             
