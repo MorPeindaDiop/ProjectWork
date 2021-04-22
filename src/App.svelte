@@ -7,6 +7,8 @@
 	import Marche from "./Marche/Marche.svelte";
 	import Modelli from "./Modelli/modelli.svelte";
 	import Motorizzazione from "./Motorizzazione/Motorizzazione.svelte";
+import Allestimento from "./Allestimento/allestimento.svelte";
+import Colore from "./colore/colore.svelte";
 
 	const routes = {
 		// Exact path
@@ -17,8 +19,8 @@
 		//"/marche/modelliAlfaRomeo": ModelliAlfaromeo,
 		"/marche/:marca": Modelli,
 		"/marche/:marca/:modello": Motorizzazione,
-		"/marche/:marca/:modello/:motorizzazione": Modelli,
-		"/marche/:marca/:modello/:motorizzazione/:allestimento": Modelli,
+		"/marche/:marca/:modello/:motorizzazione": Allestimento,
+		"/marche/:marca/:modello/:motorizzazione/:allestimento": Colore,
 		"/marche/:marca/:modello/:motorizzazione/:allestimento/:colore": Modelli,
 		"/marche/:marca/:modello/:motorizzazione/:allestimento/:colore/:optional": Modelli,
 		

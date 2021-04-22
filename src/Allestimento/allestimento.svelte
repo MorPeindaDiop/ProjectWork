@@ -7,32 +7,34 @@
     idUrl = idUrl.replace(/%20/g, " ");
     console.log(idUrl);
     let arrayUrl = idUrl.split("/");
-    let motorizzazioni = [];
-    let motorizzazioni2 = [];
+    console.log(arrayUrl);
+    let allestimenti = [];
+    let allestimenti2 = [];
     let idModello;
     let modelloProva;
 
     onMount(async () => {
-        let response = await Api.get("/motorizzazioni/findAll");
+        let response = await Api.get("/allestimento/findAll");
         let modelli = await Api.get("/modelli/findAll");
+        console.log(response.result);
 
         for (let modello of modelli.result) {
-            if (modello.modello == arrayUrl[arrayUrl.length - 1]) {
+            if (modello.modello == arrayUrl[3]) {
                 idModello = modello.id_Modello;
                 modelloProva = modello;
             }
         }
-        for (let motorizzazione of response.result) {
-            if (motorizzazione.id_Modello == idModello) {
-                motorizzazioni.push(motorizzazione);
+        for (let allestimento of response.result) {
+            if (allestimento.id_Modello == idModello) {
+                allestimenti.push(allestimento);
                 stampo();
             }
         }
         //console.log(modelli);
     });
     function stampo() {
-        motorizzazioni2 = motorizzazioni;
-        console.log(motorizzazioni2);
+        allestimenti2 = allestimenti;
+        console.log(allestimenti2);
     }
 </script>
 
@@ -66,19 +68,20 @@
         }
         .table {
             background-color: white;
-            width: 80%;
+            width: 40%;
             margin: 0 auto;
             -webkit-border-radius: 15px;
         }
-
         .table th {
             border-top: 0px !important;
         }
-
         button {
             background-color: #008cba;
-            color:white;
-        } /* Blue */
+            color: white;
+        } 
+        p {
+            color: white;
+        }
     </style>
 </head>
 
@@ -88,22 +91,16 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Motore</th>
-                    <th scope="col">Alimentazione</th>
-                    <th scope="col">Cambio</th>
-                    <th scope="col">Consumo</th>
+                    <th scope="col">Allestimento</th>
                 </tr>
             </thead>
             <tbody>
-                {#each motorizzazioni2 as motorizzazione2}
+                {#each allestimenti2 as allestimenti}
                     <tr>
-                        <td>{motorizzazione2.motore}</td>
-                        <td>{motorizzazione2.alimentazione}</td>
-                        <td>{motorizzazione2.cambio}</td>
-                        <td>{motorizzazione2.consumo}</td>
+                        <td>{allestimenti.descrizione}</td>
                         <td>
                             <a
-                                href="{idUrl}/{motorizzazione2.id_Motorizzazione}"
+                                href="{idUrl}/{allestimenti.descrizione}"
                                 use:link
                             >
                                 <button>SELEZIONA</button>
@@ -113,6 +110,5 @@
                 {/each}
             </tbody>
         </table>
-        <!-- <p>{motorizzazione2.descrizione}</p> -->
     {/if}
 </div>

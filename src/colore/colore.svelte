@@ -1,0 +1,111 @@
+<head>
+    
+    <style>
+        body{background-color:black;}
+        /*----  Main Style  ----*/
+        #cards_landscape_wrap-2 {
+            text-align: center;
+            background: rgb(51, 52, 51);
+           -webkit-border-radius: 20px;
+           -moz-border-radius: 20px;
+           border-radius:20px;
+           padding-bottom: 3%;
+        }
+
+        h2{
+            padding-top:2%;
+            color:white;
+        }
+        p{color:white}
+        .immagine{
+            padding-top:2%;
+            padding-bottom:2%;
+            width:40%;
+            height:40%;
+        }
+        .table{
+            
+            background-color:white;
+            width:80%;
+            margin:0 auto;
+            -webkit-border-radius: 15px;
+           
+        }
+        button {background-color: #008CBA;} /* Blue */
+        
+    </style>
+</head>
+
+<script>
+    import {link} from 'svelte-spa-router';
+    import { location} from 'svelte-spa-router'
+    import { onMount } from 'svelte';
+    import Api from '../Api.js';
+    export let idUrl = $location
+    idUrl = idUrl.replace(/%20/g,' ');
+    console.log(idUrl)
+    let arrayUrl=idUrl.split('/');
+    let colori = [];
+    let colori2 = [];
+    let idModello;
+    let modelloProva;
+
+onMount(async () => {
+    let response = await Api.get('/colore/findAll')
+    let modelli = await Api.get('/modelli/findAll')
+
+    for (let modello of modelli.result) {
+        if (modello.modello == arrayUrl[3]) {
+            idModello=modello.id_Modello;
+            modelloProva=modello
+        }
+    }
+    for (let colore of response.result) {
+        if (colore.id_Modello == idModello) {
+            colori.push(colore);
+            stampo()
+        }
+
+    }
+//console.log(modelli);
+
+});
+function stampo() {
+    colori2 = colori;
+    console.log(colori2)
+}
+  </script>
+
+<div id="cards_landscape_wrap-2">
+<!-- {#if modelloProva != undefined}
+<img src="{modelloProva.src}" alt="">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Motore</th>
+        <th scope="col">Alimentazione</th>
+        <th scope="col">Cambio</th>
+        <th scope="col">Consumo</th>
+      </tr>
+    </thead>
+    <tbody>
+        {#each motorizzazioni2 as motorizzazione2}
+      <tr>
+        <td>{motorizzazione2.motore}</td>
+        <td>{motorizzazione2.alimentazione}</td>
+        <td>{motorizzazione2.cambio}</td>
+        <td>{motorizzazione2.consumo}</td>
+        <td> <a href="{idUrl}/{motorizzazione2.id_Motorizzazione}" use:link> <button>SELEZIONA</button> </a></td>
+      </tr>
+      {/each}
+    </tbody>
+  </table> -->
+<!-- <p>{motorizzazione2.descrizione}</p> -->
+
+<!-- {/if} -->
+{#each colori2 as colore2}
+<img src="bmw-serie1-{colore2.descrizione}" alt="">
+<form on:submit={cambiaColore()}></form>
+<button>{colore2.descrizione}</button>
+{/each}
+</div>
