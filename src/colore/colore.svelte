@@ -29,7 +29,9 @@
                 if (srcSelected == "") {
                     srcSelected = colore.src;
                     colorSelected = colore.descrizione;
+                    
                 }
+
 
                 stampo();
             }
