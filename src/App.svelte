@@ -9,6 +9,7 @@
 	import Motorizzazione from "./Motorizzazione/Motorizzazione.svelte";
 import Allestimento from "./Allestimento/allestimento.svelte";
 import Colore from "./colore/colore.svelte";
+import Configurazione from "./RiepilogoAuto/configurazione.svelte";
 
 	const routes = {
 		// Exact path
@@ -21,7 +22,7 @@ import Colore from "./colore/colore.svelte";
 		"/marche/:marca/:modello": Motorizzazione,
 		"/marche/:marca/:modello/:motorizzazione": Allestimento,
 		"/marche/:marca/:modello/:motorizzazione/:allestimento": Colore,
-		"/marche/:marca/:modello/:motorizzazione/:allestimento/:colore": Modelli,
+		"/marche/:marca/:modello/:motorizzazione/:allestimento/:colore": Configurazione,
 		"/marche/:marca/:modello/:motorizzazione/:allestimento/:colore/:optional": Modelli,
 		
 	};

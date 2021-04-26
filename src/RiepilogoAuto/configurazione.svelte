@@ -118,27 +118,7 @@
 </head>
 
 <div id="cards_landscape_wrap-2">
-    <h2>Scegli il colore dell'auto</h2>
-
-    <div class="row">
-        <div class="column">
-            <img class="immagine" src={srcSelected} alt="" />
-        </div>
-        <div class="column">
-            <!-- svelte-ignore a11y-label-has-associated-control -->
-            <label>Colore: {colorSelected}</label>
-
-            <br />
-            <br />
-            {#each colori2 as colore2}
-                <button
-                    on:click={() => (srcSelected = colore2.src, colorSelected=colore2.descrizione)}
-                    style="background:{colore2.colore};border-radius:50%;width:60px;height:60px; float:left;text-decoration: none;border: none;outline:0"
-                />{/each}
-                <a href="{idUrl}/{colorSelected}" use:link><button class="avanti">AVANTI</button></a>
-            </div>
-
-        
-    </div>
+    
+    
     
 </div>
