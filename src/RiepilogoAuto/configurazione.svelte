@@ -12,11 +12,10 @@
     let idModello;
     let RiepilogoModello;
     let RiepilogoMarca;
-    let srcSelected = "";
     let RiepilogoColore;
     let RiepilogoMotorizzazione;
     let RiepilogoAllestimento;
-    let srcFinale="";
+    let srcFinale = "";
 
     onMount(async () => {
         let response = await Api.get("/configurazione/findAll");
@@ -25,8 +24,6 @@
         let colori = await Api.get("/colore/findAll");
         let motorizzazioni = await Api.get("/motorizzazioni/findAll");
         let allestimenti = await Api.get("/allestimento/findAll");
-
-        
 
         for (let marca of marche.result) {
             if (marca.marca == arrayUrl[2]) {
@@ -37,7 +34,7 @@
         for (let modello of modelli.result) {
             if (modello.modello == arrayUrl[3]) {
                 idModello = modello.id_Modello;
-                RiepilogoModello=modello.modello
+                RiepilogoModello = modello.modello;
             }
         }
 
@@ -54,19 +51,13 @@
         }
 
         for (let colore of colori.result) {
-           
-                if(idModello==colore.id_Modello){
-                    if (colore.descrizione == arrayUrl[6]) {
-                
-                 RiepilogoColore = colore.descrizione;
-                srcFinale=colore.src;
+            if (idModello == colore.id_Modello) {
+                if (colore.descrizione == arrayUrl[6]) {
+                    RiepilogoColore = colore.descrizione;
+                    srcFinale = colore.src;
                 }
-                
-                
-                
             }
         }
-        
     });
 
     function stampo() {
@@ -77,7 +68,9 @@
 
 <head>
     <style>
-        div{color:white}
+        div {
+            color: white;
+        }
         body {
             background-color: black;
         }
@@ -94,19 +87,21 @@
         h1 {
             padding-top: 2%;
             color: white;
-            padding-bottom:1%;
+            padding-bottom: 1%;
         }
         p {
             color: white;
         }
         .immagine {
-            width: 90%;
+            width: 50%;
+            height: 40%;
+            margin: 0 auto;
         }
         .table {
             background-color: white;
             width: 80%;
             margin: 0 auto;
-            margin-top:4%;
+            margin-top: 4%;
             -webkit-border-radius: 15px;
         }
         button {
@@ -124,10 +119,7 @@
             float: left;
             width: 50%;
             padding-left: 2%;
-            /* Should be removed. Only for demonstration */
         }
-
-        /* Clear floats after the columns */
         .row:after {
             content: "";
             display: table;
@@ -143,56 +135,39 @@
         button {
             margin-right: 1%;
         }
-        .avanti{
-            float:right;
-            margin-right:8%;
+        .avanti {
+            float: right;
+            margin-right: 8%;
             margin-top: 30%;
-            color:white;
-            border:none
-        }
-        img{
-            width:50%;
-            height:40%;
-            margin:0 auto
+            color: white;
+            border: none;
         }
     </style>
 </head>
 
 <div id="cards_landscape_wrap-2">
     <h1>Auto finale</h1>
-    <img  src={srcFinale} alt="" />
-    
-    <!-- <br>
-    {RiepilogoMarca}
-    <br>
-    {RiepilogoModello}
-    <br>
-    {RiepilogoMotorizzazione}
-    <br>
-    {RiepilogoAllestimento}
-    <br>
-    {RiepilogoColore} -->
+    <img class="immagine" src={srcFinale} alt="" />
 
     <table class="table table-borderless">
         <thead>
-          <tr>
-            <th scope="col">Marca</th>
-            <th scope="col">Modello</th>
-            <th scope="col">Motorizzazione</th>
+            <tr>
+                <th scope="col">Marca</th>
+                <th scope="col">Modello</th>
+                <th scope="col">Motorizzazione</th>
 
-            <th scope="col">Allestimento</th>
-            <th scope="col">Colore</th>
-          </tr>
+                <th scope="col">Allestimento</th>
+                <th scope="col">Colore</th>
+            </tr>
         </thead>
         <tbody>
-          <tr>
-            
-            <td>{RiepilogoMarca}</td>
-            <td>{RiepilogoModello}</td>
-            <td>{RiepilogoMotorizzazione}</td>
-            <td>{RiepilogoAllestimento}</td>
-            <td>{RiepilogoColore}</td>
-          </tr>
+            <tr>
+                <td>{RiepilogoMarca}</td>
+                <td>{RiepilogoModello}</td>
+                <td>{RiepilogoMotorizzazione}</td>
+                <td>{RiepilogoAllestimento}</td>
+                <td>{RiepilogoColore}</td>
+            </tr>
         </tbody>
-      </table>
+    </table>
 </div>

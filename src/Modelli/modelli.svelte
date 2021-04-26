@@ -1,17 +1,49 @@
+<script>
+    import { link } from "svelte-spa-router";
+    import { location } from "svelte-spa-router";
+    import { onMount } from "svelte";
+    import Api from "../Api.js";
+    export const idUrl = $location;
+    let arrayUrl = idUrl.split("/");
+    let modelli = [];
+    let modelli2 = [];
+    let idMarca;
+
+    onMount(async () => {
+        const response = await Api.get("/modelli/findAll");
+        let marche = await Api.get("/marche/findAll");
+
+        for (let marca of marche.result) {
+            if (marca.marca == arrayUrl[arrayUrl.length - 1]) {
+                idMarca = marca.id_Marca;
+            }
+        }
+        for (let modello of response.result) {
+            if (modello.id_Marca == idMarca) {
+                modelli.push(modello);
+                stampo();
+            }
+        }
+    });
+    function stampo() {
+        modelli2 = modelli;
+    }
+</script>
+
 <head>
-    
     <style>
-        body{background-color:black;}
+        body {
+            background-color: black;
+        }
         /*----  Main Style  ----*/
         #cards_landscape_wrap-2 {
             text-align: center;
             background: rgb(51, 52, 51);
-           -webkit-border-radius: 20px;
-           -moz-border-radius: 20px;
-           border-radius:20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
         }
         #cards_landscape_wrap-2 .container {
-            
             padding-bottom: 100px;
         }
         #cards_landscape_wrap-2 a {
@@ -87,99 +119,36 @@
             color: #00acc1;
         }
 
-        h2{
-            padding-top:2%;
-            color:white;
+        h2 {
+            padding-top: 2%;
+            color: white;
         }
     </style>
 </head>
-
-<script>
-    import {link} from 'svelte-spa-router';
-    import { location} from 'svelte-spa-router'
-    import { onMount } from 'svelte';
-    import Api from '../Api.js';
-    export const idUrl = $location
-    let arrayUrl=idUrl.split('/');
-    let modelli = [];
-    let modelli2 = [];
-    let idMarca;
-
-onMount(async () => {
-    const response = await Api.get('/modelli/findAll')
-    let marche = await Api.get('/marche/findAll')
-
-    for (let marca of marche.result) {
-        if (marca.marca == arrayUrl[arrayUrl.length -1]) {
-        idMarca=marca.id_Marca;
-        }
-    }
-    for (let modello of response.result) {
-        if (modello.id_Marca == idMarca) {
-            modelli.push(modello);
-            stampo()
-        }
-
-    }
-//console.log(modelli);
-
-});
-function stampo() {
-    modelli2 = modelli;
-}
-  </script>
-
-<!-- Topic Cards -->
-<!-- <p style="color:white">a {modelli2.lenght}</p> -->
-<!-- {#if modelli.lenght == undefined} -->
 {#await onMount}
-
-<!-- promise is pending -->
-<p>waiting for the promise to resolve...</p>
+    <p>waiting for the promise to resolve...</p>
 {:then stampo}
-<!-- <p style="color:white">b {modelli2.length}</p> -->
-<div id="cards_landscape_wrap-2">
-    <h2>Scelgli la marca dell'auto da configurare</h2>
-    <div class="container">
-        <div class="row">
-            {#each modelli2 as modello}
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <a href="{idUrl}/{modello.modello}" use:link>
-                    <div class="card-flyer">
-                        <div class="text-box">
-                            <div class="image-box">
-                                <img
-                                    src="{modello.src}"
-                                    alt=""
-                                />
+    <div id="cards_landscape_wrap-2">
+        <h2>Scelgli la marca dell'auto da configurare</h2>
+        <div class="container">
+            <div class="row">
+                {#each modelli2 as modello}
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <a href="{idUrl}/{modello.modello}" use:link>
+                            <div class="card-flyer">
+                                <div class="text-box">
+                                    <div class="image-box">
+                                        <img src={modello.src} alt="" />
+                                    </div>
+                                    <div class="text-container">
+                                        <h6>{modello.modello}</h6>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="text-container">
-                                <h6>{modello.modello}</h6>
-                            </div>
-                        </div>
+                        </a>
                     </div>
-                </a>
+                {/each}
             </div>
-            {/each}
-            <!-- <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <a href="">
-                    <div class="card-flyer">
-                        <div class="text-box">
-                            <div class="image-box">
-                                <img
-                                src="/Image/Modelli/AlfaRomeo/giulia.jpeg"
-                                    alt=""
-                                />
-                            </div>
-                            <div class="text-container">
-                                <h6>Giulia</h6>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div> -->
         </div>
     </div>
-</div>
-<!-- {/if} -->
 {/await}

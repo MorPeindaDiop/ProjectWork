@@ -30,7 +30,6 @@
                 stampo();
             }
         }
-        //console.log(modelli);
     });
     function stampo() {
         allestimenti2 = allestimenti;
@@ -78,7 +77,7 @@
         button {
             background-color: #008cba;
             color: white;
-        } 
+        }
         p {
             color: white;
         }
@@ -101,11 +100,9 @@
                         <td>
                             <a
                                 href="{idUrl}/{allestimenti.descrizione}"
-                                use:link
-                            >
+                                use:link>
                                 <button>SELEZIONA</button>
-                            </a></td
-                        >
+                            </a></td>
                     </tr>
                 {/each}
             </tbody>

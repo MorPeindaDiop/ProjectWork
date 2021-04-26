@@ -14,8 +14,7 @@
             max-width: 525px;
             min-height: 670px;
             position: relative;
-            background: url(/Image/tesla.jpg)
-                no-repeat center;
+            background: url(/Image/tesla.jpg) no-repeat center;
             box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
                 0 17px 50px 0 rgba(0, 0, 0, 0.19);
         }
@@ -222,14 +221,13 @@
                         type="radio"
                         name="tab"
                         class="sign-in"
-                        checked
-                    /><label for="tab-1" class="tab">Login</label>
+                        checked/>
+                        <label for="tab-1" class="tab">Login</label>
                     <input
                         id="tab-2"
                         type="radio"
                         name="tab"
-                        class="sign-up"
-                    /><label for="tab-2" class="tab">Sign Up</label>
+                        class="sign-up"/><label for="tab-2" class="tab">Sign Up</label>
                     <div class="login-space">
                         <div class="login">
                             <div class="group">
@@ -238,8 +236,7 @@
                                     id="user"
                                     type="text"
                                     class="input"
-                                    placeholder="Enter your username"
-                                />
+                                    placeholder="Enter your username"/>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Password</label>
@@ -248,26 +245,22 @@
                                     type="password"
                                     class="input"
                                     data-type="password"
-                                    placeholder="Enter your password"
-                                />
+                                    placeholder="Enter your password"/>
                             </div>
                             <div class="group">
                                 <input
                                     id="check"
                                     type="checkbox"
                                     class="check"
-                                    checked
-                                />
+                                    checked/>
                                 <label for="check"
-                                    ><span class="icon" /> Keep me Signed in</label
-                                >
+                                    ><span class="icon" /> Keep me Signed in</label>
                             </div>
                             <div class="group">
                                 <input
                                     type="submit"
                                     class="button"
-                                    value="Sign In"
-                                />
+                                    value="Sign In"/>
                             </div>
                             <div class="hr" />
                             <div class="foot">
@@ -281,8 +274,7 @@
                                     id="user"
                                     type="text"
                                     class="input"
-                                    placeholder="Create your Username"
-                                />
+                                    placeholder="Create your Username"/>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Password</label>
@@ -291,38 +283,32 @@
                                     type="password"
                                     class="input"
                                     data-type="password"
-                                    placeholder="Create your password"
-                                />
+                                    placeholder="Create your password"/>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label"
-                                    >Repeat Password</label
-                                >
+                                    >Repeat Password</label>
                                 <input
                                     id="pass"
                                     type="password"
                                     class="input"
                                     data-type="password"
-                                    placeholder="Repeat your password"
-                                />
+                                    placeholder="Repeat your password"/>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label"
-                                    >Email Address</label
-                                >
+                                    >Email Address</label>
                                 <input
                                     id="pass"
                                     type="text"
                                     class="input"
-                                    placeholder="Enter your email address"
-                                />
+                                    placeholder="Enter your email address"/>
                             </div>
                             <div class="group">
                                 <input
                                     type="submit"
                                     class="button"
-                                    value="Sign Up"
-                                />
+                                    value="Sign Up"/>
                             </div>
                             <div class="hr" />
                             <div class="foot">

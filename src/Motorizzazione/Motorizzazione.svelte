@@ -28,7 +28,6 @@
                 stampo();
             }
         }
-        //console.log(modelli);
     });
     function stampo() {
         motorizzazioni2 = motorizzazioni;
@@ -41,7 +40,6 @@
         body {
             background-color: black;
         }
-        /*----  Main Style  ----*/
         #cards_landscape_wrap-2 {
             text-align: center;
             background: rgb(51, 52, 51);
@@ -77,8 +75,8 @@
 
         button {
             background-color: #008cba;
-            color:white;
-        } /* Blue */
+            color: white;
+        } 
     </style>
 </head>
 
@@ -102,17 +100,13 @@
                         <td>{motorizzazione2.cambio}</td>
                         <td>{motorizzazione2.consumo}</td>
                         <td>
-                            <a
-                                href="{idUrl}/{motorizzazione2.id_Motorizzazione}"
-                                use:link
-                            >
+                            <a href="{idUrl}/{motorizzazione2.id_Motorizzazione}"
+                                use:link>
                                 <button>SELEZIONA</button>
-                            </a></td
-                        >
+                            </a></td>
                     </tr>
                 {/each}
             </tbody>
         </table>
-        <!-- <p>{motorizzazione2.descrizione}</p> -->
     {/if}
 </div>

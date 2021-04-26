@@ -29,9 +29,7 @@
                 if (srcSelected == "") {
                     srcSelected = colore.src;
                     colorSelected = colore.descrizione;
-                    
                 }
-
 
                 stampo();
             }
@@ -90,10 +88,7 @@
             float: left;
             width: 50%;
             padding-left: 2%;
-            /* Should be removed. Only for demonstration */
         }
-
-        /* Clear floats after the columns */
         .row:after {
             content: "";
             display: table;
@@ -109,12 +104,12 @@
         button {
             margin-right: 1%;
         }
-        .avanti{
-            float:right;
-            margin-right:8%;
+        .avanti {
+            float: right;
+            margin-right: 8%;
             margin-top: 30%;
-            color:white;
-            border:none
+            color: white;
+            border: none;
         }
     </style>
 </head>
@@ -134,13 +129,14 @@
             <br />
             {#each colori2 as colore2}
                 <button
-                    on:click={() => (srcSelected = colore2.src, colorSelected=colore2.descrizione)}
-                    style="background:{colore2.colore};border-radius:50%;width:60px;height:60px; float:left;text-decoration: none;border: none;outline:0"
-                />{/each}
-                <a href="{idUrl}/{colorSelected}" use:link><button class="avanti">AVANTI</button></a>
-            </div>
-
-        
+                    on:click={() => (
+                        (srcSelected = colore2.src),
+                        (colorSelected = colore2.descrizione)
+                    )}
+                    style="background:{colore2.colore};border-radius:50%;width:60px;height:60px; float:left;text-decoration: none;border: none;outline:0"/>
+                    {/each}
+            <a href="{idUrl}/{colorSelected}" use:link
+                ><button class="avanti">AVANTI</button></a>
+        </div>
     </div>
-    
 </div>

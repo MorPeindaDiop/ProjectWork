@@ -7,28 +7,28 @@
 	import Marche from "./Marche/Marche.svelte";
 	import Modelli from "./Modelli/modelli.svelte";
 	import Motorizzazione from "./Motorizzazione/Motorizzazione.svelte";
-import Allestimento from "./Allestimento/allestimento.svelte";
-import Colore from "./colore/colore.svelte";
-import Configurazione from "./RiepilogoAuto/configurazione.svelte";
+	import Allestimento from "./Allestimento/allestimento.svelte";
+	import Colore from "./colore/colore.svelte";
+	import Configurazione from "./RiepilogoAuto/configurazione.svelte";
 
 	const routes = {
-		// Exact path
 		"/": Home,
 		"/about": About,
 		"/login": Login,
 		"/marche": Marche,
-		//"/marche/modelliAlfaRomeo": ModelliAlfaromeo,
 		"/marche/:marca": Modelli,
 		"/marche/:marca/:modello": Motorizzazione,
 		"/marche/:marca/:modello/:motorizzazione": Allestimento,
 		"/marche/:marca/:modello/:motorizzazione/:allestimento": Colore,
 		"/marche/:marca/:modello/:motorizzazione/:allestimento/:colore": Configurazione,
 		"/marche/:marca/:modello/:motorizzazione/:allestimento/:colore/:optional": Modelli,
-		
 	};
 </script>
 
-<head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/></head>
+<head
+	><link
+		rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/></head>
 <nav class="navbar navbar-expand-md navbar-dark bg-black">
 	<div
 		class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"
@@ -77,21 +77,17 @@ import Configurazione from "./RiepilogoAuto/configurazione.svelte";
 				<div class="col-md-3 col-sm-6">
 					<!--Column1-->
 					<div class="footer-pad">
-						<h4>Heading 1</h4>
+						<h4>Modelli</h4>
 						<ul class="list-unstyled">
-							<li><a href="#" /></li>
-							<li><a href="#">Payment Center</a></li>
-							<li><a href="#">Contact Directory</a></li>
-							<li><a href="#">Forms</a></li>
-							<li><a href="#">News and Updates</a></li>
-							<li><a href="#">FAQs</a></li>
+							<li><a href="#">Panoramica modelli</a></li>
+							<li><a href="#">Configuratore</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6">
 					<!--Column1-->
 					<div class="footer-pad">
-						<h4>Heading 2</h4>
+						<h4>Servizi</h4>
 						<ul class="list-unstyled">
 							<li class="colore">
 								<a href="#">Website Tutorial</a>
@@ -111,7 +107,7 @@ import Configurazione from "./RiepilogoAuto/configurazione.svelte";
 				<div class="col-md-3 col-sm-6">
 					<!--Column1-->
 					<div class="footer-pad">
-						<h4>Heading 3</h4>
+						<h4>Contattaci</h4>
 						<ul class="list-unstyled">
 							<li><a href="#">Parks and Recreation</a></li>
 							<li><a href="#">Public Works</a></li>
@@ -125,28 +121,25 @@ import Configurazione from "./RiepilogoAuto/configurazione.svelte";
 					</div>
 				</div>
 				<div class="col-md-3">
-					<h4>Follow Us</h4>
+					<h4>Showroom</h4>
 					<ul class="social-network social-circle">
 						<li>
 							<a
 								href="https://www.facebook.com/"
 								class="icoFacebook"
-								title="Facebook"><i class="fa fa-facebook" /></a
-							>
+								title="Facebook"><i class="fa fa-facebook" /></a>
 						</li>
 						<li>
 							<a
 								href="https://twitter.com/?lang=it"
 								class="icoTwitter"
-								title="Twitter"><i class="fa fa-twitter" /></a
-							>
+								title="Twitter"><i class="fa fa-twitter" /></a>
 						</li>
 						<li>
 							<a
 								href="https://it.linkedin.com/"
 								class="icoLinkedin"
-								title="Linkedin"><i class="fa fa-linkedin" /></a
-							>
+								title="Linkedin"><i class="fa fa-linkedin" /></a>
 						</li>
 					</ul>
 				</div>
