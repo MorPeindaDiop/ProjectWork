@@ -211,6 +211,54 @@
         }
     </style>
 </head>
+<script>
+    import { location, replace, push } from 'svelte-spa-router'
+    import { onMount } from 'svelte';
+    import { link } from 'svelte-spa-router'
+    import Api from '../Api.js';
+    let allUser = []
+    let errorLogin = ''
+    let user = {
+        email: '',
+        username: '',
+        password: ''
+    }
+    onMount(async () => {
+        const response = await Api.get('/user/findAll')
+        allUser = response.result
+    });
+    function login() {
+        console.log(user)
+        for (let userDB of allUser) {
+            if (userDB.email == user.email) {
+                if (userDB.password == user.password){
+                    sessionStorage.setItem('user', user.email);
+                    replace('/home')
+                } else {
+                    errorLogin = 'Password errata.'
+                }
+            }
+        }
+        if (sessionStorage.getItem('user') == null) {
+            errorLogin = 'Email o password errata.'
+        }
+    }
+
+    function create() {
+        console.log(user)
+        for (let userDB of allUser) {
+            if (userDB.email == user.email) {
+                errorLogin = 'Email già esistente, se hai già un account, esegui il Login.'
+            }
+        }
+        if (errorLogin == '') {
+            Api.post('/user/create', user)
+            .then((response) => sessionStorage.setItem('user', response.result.email), replace('/home'));
+
+        }
+    }
+
+</script>
 <div class="row">
     <div class="col-md-6 mx-auto p-0">
         <div class="card">
@@ -236,7 +284,7 @@
                                     id="user"
                                     type="text"
                                     class="input"
-                                    placeholder="Enter your username"/>
+                                    placeholder="Enter your username" bind:value={user.email}/>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Password</label>
@@ -245,7 +293,7 @@
                                     type="password"
                                     class="input"
                                     data-type="password"
-                                    placeholder="Enter your password"/>
+                                    placeholder="Enter your password" bind:value={user.password}/>
                             </div>
                             <div class="group">
                                 <input
@@ -260,21 +308,22 @@
                                 <input
                                     type="submit"
                                     class="button"
-                                    value="Sign In"/>
+                                    value="Sign In" on:click={login}/>
                             </div>
                             <div class="hr" />
                             <div class="foot">
                                 <a href="#">Forgot Password?</a>
                             </div>
+                            
                         </div>
                         <div class="sign-up-form">
                             <div class="group">
-                                <label for="user" class="label">Username</label>
+                                <label for="user" class="label" >Username</label>
                                 <input
                                     id="user"
                                     type="text"
                                     class="input"
-                                    placeholder="Create your Username"/>
+                                    placeholder="Create your Username"bind:value={user.username}/>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Password</label>
@@ -283,18 +332,18 @@
                                     type="password"
                                     class="input"
                                     data-type="password"
-                                    placeholder="Create your password"/>
+                                    placeholder="Create your password"bind:value={user.password}/>
                             </div>
-                            <div class="group">
-                                <label for="pass" class="label"
-                                    >Repeat Password</label>
+                            <!-- <div class="group">
+                                <label for="pass" class="label">
+                                    Repeat Password</label>
                                 <input
                                     id="pass"
                                     type="password"
                                     class="input"
                                     data-type="password"
-                                    placeholder="Repeat your password"/>
-                            </div>
+                                    placeholder="Repeat your password" />
+                            </div> -->
                             <div class="group">
                                 <label for="pass" class="label"
                                     >Email Address</label>
@@ -302,13 +351,13 @@
                                     id="pass"
                                     type="text"
                                     class="input"
-                                    placeholder="Enter your email address"/>
+                                    placeholder="Enter your email address"bind:value={user.email}/>
                             </div>
                             <div class="group">
                                 <input
                                     type="submit"
                                     class="button"
-                                    value="Sign Up"/>
+                                    value="Sign Up" on:click={create}>
                             </div>
                             <div class="hr" />
                             <div class="foot">

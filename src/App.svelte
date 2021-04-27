@@ -10,11 +10,30 @@
 	import Allestimento from "./Allestimento/allestimento.svelte";
 	import Colore from "./colore/colore.svelte";
 	import Configurazione from "./RiepilogoAuto/configurazione.svelte";
+	import { wrap } from 'svelte-spa-router/wrap'
+	import { location, replace } from 'svelte-spa-router'
+	import { afterUpdate } from 'svelte';
+	import { onMount } from 'svelte';
+	let url
+	url = $location
 
+
+
+	let log = ''
 	const routes = {
-		"/": Home,
+		'/login': wrap({
+			component: Login,
+			guards: [userIsLogged()],
+		}),
+		//"/": Home,
+		'/home': wrap({
+			component: Home,
+			guards: [userIsNotLogged()],
+            redirect: '/login'
+		}),
 		"/about": About,
-		"/login": Login,
+		
+		//"/login": Login,
 		"/marche": Marche,
 		"/marche/:marca": Modelli,
 		"/marche/:marca/:modello": Motorizzazione,
@@ -22,20 +41,58 @@
 		"/marche/:marca/:modello/:motorizzazione/:allestimento": Colore,
 		"/marche/:marca/:modello/:motorizzazione/:allestimento/:colore": Configurazione,
 		"/marche/:marca/:modello/:motorizzazione/:allestimento/:colore/:optional": Modelli,
-	};
+	}
+	function userIsNotLogged() {
+		if (sessionStorage.getItem('user') != null) {
+			return true
+		}
+		replace('/login')
+		return false
+	}
+	function userIsLogged() {
+		if (sessionStorage.getItem('user') == null) {
+			return true
+		}
+		return false
+	}
+
+	function logout() {
+		sessionStorage.clear()
+	}
+
+	onMount(async () => {
+        
+    });
+	afterUpdate(() => {
+		console.log('the component just updated');
+		url = $location;
+    	console.log(url)
+
+		if (sessionStorage.getItem('user')!= null) {
+			log = 'logout'
+		} else {
+			log = 'login'
+		}
+	});
+	
+
+	
+	
 </script>
 
-<head
-	><link
+<head>
+	<link
 		rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/></head>
+
+{#if url != '/login'}
 <nav class="navbar navbar-expand-md navbar-dark bg-black">
 	<div
 		class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"
 	>
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="#">Home</a>
+				<a class="nav-link" href="/home" use:link>Home</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="/about" use:link>About</a>
@@ -58,18 +115,24 @@
 	<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item">
-				<a class="nav-link" href="/login" use:link>Login</a>
+				<a class="nav-link" href="/login" use:link on:click="{logout}">{log.toUpperCase()}</a>
 			</li>
 		</ul>
 	</div>
 </nav>
 <div class="col-md-12 copy" />
+{/if}
+
+
+
 <main>
 	<!-- <h1>Hello {name}!</h1>
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p> -->
 
 	<Router {routes} />
 </main>
+
+{#if url != '/login'}
 <footer class="mainfooter" role="contentinfo">
 	<div class="footer-middle">
 		<div class="container">
@@ -155,6 +218,7 @@
 		</div>
 	</div>
 </footer>
+{/if}
 
 <style>
 	nav {

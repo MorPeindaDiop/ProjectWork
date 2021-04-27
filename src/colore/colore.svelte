@@ -12,10 +12,19 @@
     let idModello;
     let colorSelected;
     let srcSelected = "";
+    let RiepilogoModello;
+    let RiepilogoMarca;
+    let RiepilogoColore;
+    let RiepilogoMotorizzazione;
+    let RiepilogoAllestimento;
+    let idColore
 
     onMount(async () => {
         let response = await Api.get("/colore/findAll");
         let modelli = await Api.get("/modelli/findAll");
+        let marche = await Api.get("/marche/findAll");
+        let motorizzazioni = await Api.get("/motorizzazioni/findAll");
+        let allestimenti = await Api.get("/allestimento/findAll");
 
         for (let modello of modelli.result) {
             if (modello.modello == arrayUrl[3]) {
@@ -25,16 +34,48 @@
         for (let colore of response.result) {
             if (colore.id_Modello == idModello) {
                 colori.push(colore);
-
+                idColore = colore.id_Colore;
                 if (srcSelected == "") {
                     srcSelected = colore.src;
                     colorSelected = colore.descrizione;
+                    
                 }
 
                 stampo();
             }
         }
-    });
+
+        for (let motorizzazione of motorizzazioni.result) {
+            if (motorizzazione.id_Motorizzazione == arrayUrl[4]) {
+                RiepilogoMotorizzazione = motorizzazione.id_Motorizzazione;
+            }
+        }
+
+        for (let allestimento of allestimenti.result) {
+            if (allestimento.descrizione == arrayUrl[5]) {
+                RiepilogoAllestimento = allestimento.id_Allestimento;
+            }
+        }
+
+        for (let marca of marche.result) {
+            if (marca.marca == arrayUrl[2]) {
+                RiepilogoMarca = marca.id_Marca;
+            }
+        }
+    });    
+
+
+    function create(){
+        let configuration={
+            id_Allestimento : RiepilogoAllestimento,
+            id_Colore:idColore,
+            id_Marca:RiepilogoMarca,
+            id_Modello:idModello,
+            id_Motorizzazione:RiepilogoMotorizzazione,
+            id_Utente:sessionStorage.getItem("user")
+        }
+        Api.post("configurazione/create",configuration)
+    }
 
     function stampo() {
         colori2 = colori;
@@ -136,7 +177,7 @@
                     style="background:{colore2.colore};border-radius:50%;width:60px;height:60px; float:left;text-decoration: none;border: none;outline:0"/>
                     {/each}
             <a href="{idUrl}/{colorSelected}" use:link
-                ><button class="avanti">AVANTI</button></a>
+                ><button class="avanti" on:click="{create}">SALVA</button></a>
         </div>
     </div>
 </div>
