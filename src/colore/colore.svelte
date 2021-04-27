@@ -18,7 +18,7 @@
     let RiepilogoMotorizzazione;
     let RiepilogoAllestimento;
     let idColore
-
+    let bottone
     onMount(async () => {
         let response = await Api.get("/colore/findAll");
         let modelli = await Api.get("/modelli/findAll");
@@ -66,6 +66,7 @@
 
 
     function create(){
+        if(sessionStorage.getItem("user")!=null){
         let configuration={
             id_Allestimento : RiepilogoAllestimento,
             id_Colore:idColore,
@@ -74,7 +75,7 @@
             id_Motorizzazione:RiepilogoMotorizzazione,
             id_Utente:sessionStorage.getItem("user")
         }
-        Api.post("configurazione/create",configuration)
+        Api.post("configurazione/create",configuration)}
     }
 
     function stampo() {
@@ -176,8 +177,9 @@
                     )}
                     style="background:{colore2.colore};border-radius:50%;width:60px;height:60px; float:left;text-decoration: none;border: none;outline:0"/>
                     {/each}
+                    
             <a href="{idUrl}/{colorSelected}" use:link
-                ><button class="avanti" on:click="{create}">SALVA</button></a>
+                ><button class="avanti" on:click="{create}">AUTO FINALE</button></a>
         </div>
     </div>
 </div>

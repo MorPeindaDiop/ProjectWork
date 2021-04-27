@@ -2,6 +2,7 @@
 	import { link } from "svelte-spa-router";
 	import Router from "svelte-spa-router";
 	import Home from "./Home/Home.svelte";
+
 	import Login from "./Login/Login.svelte";
 	import About from "./About/About.svelte";
 	import Marche from "./Marche/Marche.svelte";
@@ -14,6 +15,7 @@
 	import { location, replace } from 'svelte-spa-router'
 	import { afterUpdate } from 'svelte';
 	import { onMount } from 'svelte';
+import Auto from "./Auto/Auto.svelte";
 	let url
 	url = $location
 
@@ -29,10 +31,10 @@
 		'/home': wrap({
 			component: Home,
 			guards: [userIsNotLogged()],
-            redirect: '/login'
+            redirect: '/Home'
 		}),
 		"/about": About,
-		
+		"/auto": Auto,
 		//"/login": Login,
 		"/marche": Marche,
 		"/marche/:marca": Modelli,
@@ -40,13 +42,13 @@
 		"/marche/:marca/:modello/:motorizzazione": Allestimento,
 		"/marche/:marca/:modello/:motorizzazione/:allestimento": Colore,
 		"/marche/:marca/:modello/:motorizzazione/:allestimento/:colore": Configurazione,
-		"/marche/:marca/:modello/:motorizzazione/:allestimento/:colore/:optional": Modelli,
+		
 	}
 	function userIsNotLogged() {
 		if (sessionStorage.getItem('user') != null) {
 			return true
 		}
-		replace('/login')
+		replace('/Home')
 		return false
 	}
 	function userIsLogged() {
@@ -97,6 +99,11 @@
 			<li class="nav-item">
 				<a class="nav-link" href="/about" use:link>About</a>
 			</li>
+			{#if log=='logout'}
+			<li class="nav-item">
+				<a class="nav-link" href="/auto" use:link>Auto</a>
+			</li>
+			{/if}
 		</ul>
 	</div>
 	<div class="mx-auto order-0">

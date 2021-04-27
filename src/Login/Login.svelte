@@ -209,6 +209,9 @@
         ::placeholder {
             color: #b3b3b3;
         }
+        p{
+            color:white
+        }
     </style>
 </head>
 <script>
@@ -240,7 +243,7 @@
             }
         }
         if (sessionStorage.getItem('user') == null) {
-            errorLogin = 'Email o password errata.'
+            errorLogin = 'Email o Password errata.'
         }
     }
 
@@ -295,14 +298,16 @@
                                     data-type="password"
                                     placeholder="Enter your password" bind:value={user.password}/>
                             </div>
+
+                            <p>{errorLogin}</p>
+                            
                             <div class="group">
                                 <input
                                     id="check"
                                     type="checkbox"
                                     class="check"
                                     checked/>
-                                <label for="check"
-                                    ><span class="icon" /> Keep me Signed in</label>
+                                
                             </div>
                             <div class="group">
                                 <input
@@ -312,7 +317,7 @@
                             </div>
                             <div class="hr" />
                             <div class="foot">
-                                <a href="#">Forgot Password?</a>
+                                <a href="/home" use:link><p>Continua senza effettuare la login</p></a>
                             </div>
                             
                         </div>
@@ -354,14 +359,15 @@
                                     placeholder="Enter your email address"bind:value={user.email}/>
                             </div>
                             <div class="group">
-                                <input
+                                <label for="tab-1"><input
                                     type="submit"
                                     class="button"
-                                    value="Sign Up" on:click={create}>
+                                    value="Sign Up" on:click={create}></label>
                             </div>
                             <div class="hr" />
                             <div class="foot">
                                 <label for="tab-1">Already Member?</label>
+                                
                             </div>
                         </div>
                     </div>
