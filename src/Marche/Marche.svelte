@@ -29,6 +29,7 @@
         #cards_landscape_wrap-2 .container {
             padding-bottom: 100px;
         }
+        
         #cards_landscape_wrap-2 a {
             text-decoration: none;
             outline: none;
@@ -62,7 +63,7 @@
             text-align: center;
         }
         #cards_landscape_wrap-2 .card-flyer .text-box .text-container {
-            padding: 30px 18px;
+            padding: 30px 15px;
         }
         #cards_landscape_wrap-2 .card-flyer {
             background: #ffffff;

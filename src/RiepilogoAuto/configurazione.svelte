@@ -136,9 +136,9 @@
             margin-right: 1%;
         }
         .avanti {
-            float: right;
-            margin-right: 8%;
-            margin-top: 30%;
+            
+            margin:0 auto;
+            margin-top: 2%;
             color: white;
             border: none;
         }
@@ -155,7 +155,6 @@
                 <th scope="col">Marca</th>
                 <th scope="col">Modello</th>
                 <th scope="col">Motorizzazione</th>
-
                 <th scope="col">Allestimento</th>
                 <th scope="col">Colore</th>
             </tr>
@@ -170,4 +169,5 @@
             </tr>
         </tbody>
     </table>
+    <a href="/home" use:link><button class="avanti" >TORNA ALLA HOME</button></a>
 </div>

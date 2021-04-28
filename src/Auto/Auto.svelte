@@ -16,7 +16,7 @@
     let riepilogoColore;
     let riepilogoMotorizzazione;
     let riepilogoAllestimento;
-    let riepilogoSrc;
+    let riepilogoSrc="";
     // let srcFinale = "";
 
     let utente;
@@ -31,12 +31,12 @@
         let marche = await Api.get("/marche/findAll");
         let motorizzazioni = await Api.get("/motorizzazioni/findAll");
         let allestimenti = await Api.get("/allestimento/findAll");
-        console.log("1")
+        
         console.log(configurazioni.result)
         for (let configurazione of configurazioni.result) {
-            console.log("2")
+           
             if(configurazione.id_Utente==sessionStorage.getItem("user")){
-                console.log("3")
+               
                 for (let allestimento of allestimenti.result) {
                     if (allestimento.id_Allestimento ==configurazione.id_Allestimento) {
                          riepilogoAllestimento = allestimento.descrizione;
@@ -75,7 +75,7 @@
                     src:riepilogoSrc
                 }
                 cards.push(riepilogo)
-
+                
             }
             stampo()
         }
@@ -186,6 +186,7 @@
         }
         #cards_landscape_wrap-2 .card-flyer {
             border-radius: 5px;
+            width:350px
         }
         #cards_landscape_wrap-2 .card-flyer .image-box {
             background: #ffffff;
@@ -199,7 +200,7 @@
             -o-transition: all 0.9s ease;
             -ms-transition: all 0.9s ease;
             width: 100%;
-            height: 180px;
+            height: 250px;
         }
         #cards_landscape_wrap-2 .card-flyer:hover .image-box img {
             opacity: 0.7;
@@ -213,7 +214,7 @@
             text-align: center;
         }
         #cards_landscape_wrap-2 .card-flyer .text-box .text-container {
-            padding: 30px 18px;
+            padding: 10px 18px;
         }
         #cards_landscape_wrap-2 .card-flyer {
             background: #ffffff;
@@ -261,7 +262,7 @@
 </head>
 
 <div id="cards_landscape_wrap-2">
-    <h1>Auto finale</h1>
+    <h1>Le tue auto configurate</h1>
 
     <div id="cards_landscape_wrap-2">
         <div class="container">
@@ -269,9 +270,9 @@
             <div class="row">
             {#if cards2.length!=0}
             {#each cards2 as card}
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-4">
                     
-                        <div class="card-flyer">
+                        <div class="card-flyer" >
                             <div class="text-box">
                                 <div class="image-box">
                                     <img src={card.src} alt="" />

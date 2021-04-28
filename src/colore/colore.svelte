@@ -34,10 +34,10 @@
         for (let colore of response.result) {
             if (colore.id_Modello == idModello) {
                 colori.push(colore);
-                idColore = colore.id_Colore;
                 if (srcSelected == "") {
                     srcSelected = colore.src;
                     colorSelected = colore.descrizione;
+                    idColore = colore.id_Colore;
                     
                 }
 
@@ -173,7 +173,8 @@
                 <button
                     on:click={() => (
                         (srcSelected = colore2.src),
-                        (colorSelected = colore2.descrizione)
+                        (colorSelected = colore2.descrizione),
+                        (idColore = colore2.id_Colore)
                     )}
                     style="background:{colore2.colore};border-radius:50%;width:60px;height:60px; float:left;text-decoration: none;border: none;outline:0"/>
                     {/each}
